@@ -1,0 +1,23 @@
+syntax = "proto3";
+option java_multiple_files = true;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+service ChatRoom {
+  rpc JoinChat(JoinRequest) returns (stream ChatMessage);
+
+  rpc Send(ChatMessage) returns (google.protobuf.Empty);
+}
+
+message JoinRequest {
+  string room_id = 1;
+}
+
+message ChatMessage {
+  string user_id = 1;
+  string content = 2;
+  string room_id = 3;
+  string message_id = 4;
+  google.protobuf.Timestamp timestamp = 5;
+}
